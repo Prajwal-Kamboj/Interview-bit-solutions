@@ -1,0 +1,20 @@
+vector<int> Solution::postorderTraversal(TreeNode* A) {
+    vector<int> ans;
+    stack <pair<TreeNode*,int>> st;
+    st.push({A,0});
+    
+    while (!st.empty()){
+        auto x = st.top();
+        TreeNode* root = x.first;
+        int state = x.second;
+        st.pop();
+        
+        if(root==NULL or state==3) continue;
+        st.push({root,state+1});
+        if(state==0) st.push({root->left,0});
+        else if(state==1) st.push({root->right,0});
+        else if(state==2) ans.push_back(root->val);
+        
+    }
+    return ans;
+}
