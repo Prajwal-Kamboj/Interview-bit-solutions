@@ -1,0 +1,19 @@
+int Solution::kthsmallest(TreeNode* A, int B) {
+    vector<int> ans;
+    stack<pair<TreeNode*,int>> st;
+    st.push({A,0});
+    while (!st.empty()){
+        auto x = st.top();
+        TreeNode* root = x.first;
+        int state = x.second;
+        st.pop();
+        if(root==NULL or state==3) continue;
+        st.push({root,state+1});
+        if(state==0) st.push({root->left,0});
+        if(state==2) st.push({root->right,0});
+        if(state==1) ans.push_back(root->val);
+        
+    }
+    
+    return ans[B-1];
+}
