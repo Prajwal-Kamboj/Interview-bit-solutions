@@ -1,0 +1,22 @@
+int search(int val,int start,int end, vector<int>&B){
+    int i;
+    for( i=start;i<=end;i++){
+        if(B[i]==val) return i;
+    }
+    return 0;
+}
+ TreeNode* solve(vector<int> &A, vector<int> &B,int start,int end, int&index){
+     if(start>end) return NULL;
+     TreeNode* root = new TreeNode(A[index++]);
+     if(start==end) return root;
+     int mid = search(root->val,start,end,B);
+    
+     root->left = solve(A,B,start,mid-1,index);
+     root->right = solve(A,B,mid+1,end,index);
+     return root;
+     
+ }
+TreeNode* Solution::buildTree(vector<int> &A, vector<int> &B) {
+    int index = 0;
+    return solve(A,B,0,A.size()-1,index);
+}

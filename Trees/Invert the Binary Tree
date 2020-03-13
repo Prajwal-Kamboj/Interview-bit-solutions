@@ -1,0 +1,16 @@
+void mirror (TreeNode*A){
+     if(A==NULL) return;
+     else{
+         TreeNode* temp;
+         mirror(A->left);
+         mirror(A->right);
+         temp = A->left;
+         A->left= A->right;
+         A->right=temp;
+     }
+     return ;
+ }
+TreeNode* Solution::invertTree(TreeNode* A) {
+    mirror(A);
+    return A;
+}
